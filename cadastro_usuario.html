@@ -27,5 +27,26 @@
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('#userRegistrationForm').submit(function(event) {
+        event.preventDefault();
+
+        var formData = $(this).serialize();
+
+        $.ajax({
+            type: "POST",
+            url: "cadastrar_usuario.php",
+            data: formData,
+            success: function(response) {
+                alert(response);
+                window.location.href = 'login.html';
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
