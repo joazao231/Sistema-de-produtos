@@ -5,7 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username']) && !empty
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Hash da senha
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     try {
