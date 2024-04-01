@@ -5,6 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username']) && !empty
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Hash da senha
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     try {
@@ -16,6 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username']) && !empty
         echo "Erro ao cadastrar usuário: " . $e->getMessage();
     }
 } else {
-    echo "Preencha todos os campos";
+    echo "Todos os campos são obrigatórios!";
 }
 ?>

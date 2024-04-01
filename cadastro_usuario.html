@@ -31,17 +31,17 @@
 <script>
 $(document).ready(function() {
     $('#userRegistrationForm').submit(function(event) {
-        event.preventDefault();
+        event.preventDefault(); // Previne o comportamento padrão do formulário de recarregar a página.
 
-        var formData = $(this).serialize();
+        var formData = $(this).serialize(); // Captura os dados do formulário.
 
         $.ajax({
             type: "POST",
-            url: "cadastrar_usuario.php",
+            url: "cadastrar_usuario.php", // URL do arquivo PHP que irá processar os dados
             data: formData,
             success: function(response) {
-                alert(response);
-                window.location.href = 'login.html';
+                alert(response); // Mostra o alerta com a resposta do PHP
+                window.location.href = 'login.html'; // Redireciona para a página de login
             }
         });
     });
