@@ -1,51 +1,27 @@
 <?php
-session_start();
-if(isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit;
-}
+require 'db.php';
 
-include 'connection.php';
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username']) && !empty($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $stmt = $pdo->prepare("SELECT id, username, password FROM usuarios WHERE username = ?");
-    $stmt->execute([$username]);
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE username = :username");
+    $stmt->execute([':username' => $username]);
     $user = $stmt->fetch();
 
-    if($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        header("Location: index.php");
-        exit;
+    if ($user && password_verify($password, $user['pass'])) {
+        $stmt = $pdo->query("SELECT COUNT(*) FROM produtos");
+        $count = $stmt->fetchColumn();
+
+        if ($count > 0) {header("Location: pagina_principal.html");
+                        exit;
+        } else {header("Location: cadastro_fornecedor.html");
+                exit;
+        }
     } else {
-        $error = "Usuário ou senha incorretos.";
+        echo "Usuário ou senha inválidos!";
     }
+} else {
+    echo "Preencha todos os campos";
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
-    <div class="container mt-5">
-        <h2 class="mb-4">Login</h2>
-        <form method="post" action="" class="col-md-6">
-            <div class="form-group">
-                <label for="username">Usuário:</label>
-                <input type="text" name="username" id="username" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" name="password" id="password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-    </div>
-</body>
-</html>
-
