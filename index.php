@@ -7,7 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
     exit;
 } else {
-    header("Location: lista_produtos.php");
+    header("Location: login.html");
 }
 ?>
 <!DOCTYPE html>
