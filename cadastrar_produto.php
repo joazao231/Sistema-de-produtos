@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome']) && !empty($_P
         $stmt = $db->prepare("INSERT INTO produtos (nome, descricao, preco) VALUES (:nome, :descricao, :preco)");
         $stmt->execute([':nome' => $nome, ':descricao' => $descricao, ':preco' => $preco]);
 
-        echo "Produto cadastrado com sucesso!";
+          echo "<script>alert('Produto cadastrado com sucesso!');window.location.href = 'cadastro_produto.html';</script>";
     } catch (PDOException $e) {
         http_response_code(500);
         echo "Erro ao cadastrar produto: " . $e->getMessage();
