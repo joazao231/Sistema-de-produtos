@@ -58,21 +58,24 @@
     </form>
 </div>
 <script>
-$(document).ready(function() {
-    $.ajax({
-        url: 'buscar_fornecedores.php',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            $.each(data, function(index, fornecedor) {
-                $('#fornecedor').append($('<option>', {
-                    value: fornecedor.id,
-                    text: fornecedor.nome
-                }));
+document.addEventListener('DOMContentLoaded', function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'buscar_fornecedores.php', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            var selectFornecedor = document.getElementById('fornecedor');
+            data.forEach(function(fornecedor) {
+                var option = document.createElement('option');
+                option.value = fornecedor.id;
+                option.textContent = fornecedor.nome;
+                selectFornecedor.appendChild(option);
             });
         }
-    });
+    };
+    xhr.send();
 });
+
 </script>
 </body>
 </html>

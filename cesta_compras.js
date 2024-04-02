@@ -65,12 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4 && xhr.status === 200) {
         carregarCestaCompras();
-      } else {
-        console.error(
-          "Erro ao remover produto da cesta de compras: " + xhr.statusText
-        );
-      }
-    };
+      }};
     xhr.send("produto_id=" + encodeURIComponent(produtoId));
   }
 

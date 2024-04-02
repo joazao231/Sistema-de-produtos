@@ -54,50 +54,55 @@
         </form>
     </div>
     <script>
-        $(document).ready(function() {
-    $('form[action="cadastrar_produto.php"]').submit(function(event) {
-        event.preventDefault();
+    document.addEventListener('DOMContentLoaded', function() {
+    var cadastrarProdutoForm = document.querySelector('form[action="cadastrar_produto.php"]');
+    if (cadastrarProdutoForm) {
+        cadastrarProdutoForm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-        var form = $(this);
-        var url = form.attr('action');
-        var formData = form.serialize();
+            var formData = new FormData(this);
+            var url = this.getAttribute('action');
 
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            success: function(response) {
-                alert(response);
-                form.trigger('reset');
-            },
-            error: function(xhr, status, error) {
-                alert('Erro ao cadastrar produto: ' + xhr.responseText);
-            }
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert(xhr.responseText);
+                        cadastrarProdutoForm.reset();
+                    } else {
+                        alert('Erro ao cadastrar produto: ' + xhr.responseText);
+                    }
+                }
+            };
+            xhr.send(formData);
         });
-    });
+    }
 
-    $('form[action="cadastrar_fornecedor.php"]').submit(function(event) {
-        event.preventDefault();
+    var cadastrarFornecedorForm = document.querySelector('form[action="cadastrar_fornecedor.php"]');
+    if (cadastrarFornecedorForm) {
+        cadastrarFornecedorForm.addEventListener('submit', function(event) {
+            event.preventDefault();
 
-        var form = $(this);
-        var url = form.attr('action');
-        var formData = form.serialize();
+            var formData = new FormData(this);
+            var url = this.getAttribute('action');
 
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            success: function(response) {
-                alert(response);
-                form.trigger('reset');
-            },
-            error: function(xhr, status, error) {
-                alert('Erro ao cadastrar fornecedor: ' + xhr.responseText);
-            }
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert(xhr.responseText);
+                        cadastrarFornecedorForm.reset();
+                    } else {
+                        alert('Erro ao cadastrar fornecedor: ' + xhr.responseText);
+                    }
+                }
+            };
+            xhr.send(formData);
         });
-    });
+    }
 });
-
-    </script>
+</script>
 </body>
 </html>

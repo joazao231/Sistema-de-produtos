@@ -32,9 +32,9 @@ try {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
     ";
 
-    $pdo->exec($sql_fornecedores);
-    $pdo->exec($sql_produtos);
-    $pdo->exec($sql_usuarios);
+    $db->exec($sql_fornecedores);
+    $db->exec($sql_produtos);
+    $db->exec($sql_usuarios);
 
     echo "Tabelas criadas com sucesso!";
 } catch (PDOException $e) {

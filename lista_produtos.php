@@ -45,52 +45,65 @@
         </form>
     </div>
     <script>
-        $(document).ready(function() {
-            function carregarListaProdutos() {
-                $.ajax({
-                    url: 'buscar_produtos.php',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        $('#lista-produtos').empty();
-                        $.each(data, function(index, produto) {
-                            var listItem = $('<li class="list-group-item"></li>');
-                            var checkbox = $('<input type="checkbox" class="mr-2 produto-checkbox">').attr('name', 'produtos[]').val(produto.id);
-                            var textoProduto = $('<span></span>').text(produto.nome + ' - R$ ' + produto.preco);
-                            listItem.append(checkbox).append(textoProduto);
-                            $('#lista-produtos').append(listItem);
-                        });
-                    }
+    document.addEventListener('DOMContentLoaded', function() {
+    function carregarListaProdutos() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'buscar_produtos.php', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var listaProdutos = document.getElementById('lista-produtos');
+                listaProdutos.innerHTML = '';
+                data.forEach(function(produto) {
+                    var listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    var checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.className = 'mr-2 produto-checkbox';
+                    checkbox.name = 'produtos[]';
+                    checkbox.value = produto.id;
+                    var textoProduto = document.createElement('span');
+                    textoProduto.textContent = produto.nome + ' - R$ ' + produto.preco;
+                    listItem.appendChild(checkbox);
+                    listItem.appendChild(textoProduto);
+                    listaProdutos.appendChild(listItem);
                 });
             }
+        };
+        xhr.send();
+    }
 
-            carregarListaProdutos();
+    carregarListaProdutos();
 
-            $(document).on('change', '.produto-checkbox', function() {
-                var peloMenosUmSelecionado = $('.produto-checkbox:checked').length > 0;
-                $('#btn-adicionar-cesta').prop('disabled', !peloMenosUmSelecionado);
-            });
+    document.addEventListener('change', function(event) {
+        if (event.target.classList.contains('produto-checkbox')) {
+            var peloMenosUmSelecionado = document.querySelectorAll('.produto-checkbox:checked').length > 0;
+            document.getElementById('btn-adicionar-cesta').disabled = !peloMenosUmSelecionado;
+        }
+    });
 
-            $('#form-adicionar-cesta').submit(function(event) {
-                event.preventDefault();
+    document.getElementById('form-adicionar-cesta').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-                var produtosSelecionados = $('input[name="produtos[]"]:checked').map(function() {
-                    return this.value;
-                }).get();
-
-                $.ajax({
-                    url: 'adicionar_cesta.php',
-                    type: 'POST',
-                    data: { id: produtosSelecionados },
-                    success: function(response) {
-                        alert(response);
-                    },
-                    error: function(xhr, status, error) {
-                        alert('Erro ao adicionar produtos à cesta: ' + xhr.responseText);
-                    }
-                });
-            });
+        var produtosSelecionados = Array.from(document.querySelectorAll('input[name="produtos[]"]:checked')).map(function(checkbox) {
+            return checkbox.value;
         });
-    </script>
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'adicionar_cesta.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    alert(xhr.responseText);
+                } else {
+                    alert('Erro ao adicionar produtos à cesta: ' + xhr.responseText);
+                }
+            }
+        };
+        xhr.send(JSON.stringify({ id: produtosSelecionados }));
+    });
+});
+</script>
 </body>
 </html>
