@@ -44,8 +44,6 @@
             <button type="submit" class="btn btn-primary" id="btn-adicionar-cesta" disabled>Adicionar à Cesta</button>
         </form>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         $(document).ready(function() {
             function carregarListaProdutos() {
