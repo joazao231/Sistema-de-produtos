@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['username']) && !empty
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO usuarios (username, pass) VALUES (:username, :pass)");
+        $stmt = $db->prepare("INSERT INTO usuarios (username, pass) VALUES (:username, :pass)");
         $stmt->execute([':username' => $username, ':pass' => $passwordHash]);
 
         echo "Usuário cadastrado com sucesso!";

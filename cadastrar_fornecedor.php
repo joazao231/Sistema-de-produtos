@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome'])) {
     $nome = $_POST['nome'];
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO fornecedores (nome) VALUES (:nome)");
+        $stmt = $db->prepare("INSERT INTO fornecedores (nome) VALUES (:nome)");
         $stmt->execute([':nome' => $nome]);
 
         echo "Fornecedor cadastrado com sucesso!";

@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['fornecedor_id'])) {
     $fornecedor_id = $_POST['fornecedor_id'];
 
     try {
-        $stmt = $pdo->prepare("DELETE FROM fornecedores WHERE id = :fornecedor_id");
+        $stmt = $db->prepare("DELETE FROM fornecedores WHERE id = :fornecedor_id");
         $stmt->execute([':fornecedor_id' => $fornecedor_id]);
 
         echo "Fornecedor removido com sucesso!";

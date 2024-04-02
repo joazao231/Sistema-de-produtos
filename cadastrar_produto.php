@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['nome']) && !empty($_P
     $preco = $_POST['preco'];
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO produtos (nome, descricao, preco) VALUES (:nome, :descricao, :preco)");
+        $stmt = $db->prepare("INSERT INTO produtos (nome, descricao, preco) VALUES (:nome, :descricao, :preco)");
         $stmt->execute([':nome' => $nome, ':descricao' => $descricao, ':preco' => $preco]);
 
         echo "Produto cadastrado com sucesso!";
