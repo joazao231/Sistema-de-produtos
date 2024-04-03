@@ -15,7 +15,7 @@ Este é o Sistema de Gestão de Produtos, um sistema web desenvolvido para geren
 
 ## Links
 
-- [Figma](https://www.figma.com/file/YnI6HVL5fgLrcJisGAVL8Z/Untitled?type=design&node-id=0%3A1&mode=design&t=bAq7bPsHS43w1oxN-1):
+- [Figma](https://www.figma.com/file/YnI6HVL5fgLrcJisGAVL8Z/Untitled?type=design&node-id=0%3A1&mode=design&t=bAq7bPsHS43w1oxN-1)
 - ![Diagrama Entidade Relacionamento](https://github.com/joazao231/Sistema-de-produtos/blob/b17fd802a4ce898b8f6c154f301431d00487d93e/DER.png): 
 
 O Diagrama de Entidade-Relacionamento (DER) representa a estrutura do banco de dados do sistema, incluindo as entidades, seus atributos e os relacionamentos entre elas.
