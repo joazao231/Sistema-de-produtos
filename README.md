@@ -52,12 +52,11 @@ O Diagrama de Entidade-Relacionamento (DER) representa a estrutura do banco de d
 ## Como usar
 
 1. Faça o download de todos os arquivos do repositório.
-2. Importe o banco de dados utilizando o script `create_database.php` para criar o banco de dados e `criar_tabelas.php` para criar as tabelas necessárias.
-3. Configure as credenciais do banco de dados no arquivo `db.php`.
-4. Abra o sistema em um servidor web (ex: Apache) e acesse a página inicial `index.php`.
-5. Faça login com um usuário existente ou cadastre um novo usuário.
-6. Após o login, você será redirecionado para a lista de produtos ou fornecedores, dependendo do número de produtos cadastrados.
-7. Explore as diferentes funcionalidades do sistema, como cadastrar novos produtos, fornecedores, visualizar a lista de produtos disponíveis, adicionar produtos à cesta de compras, entre outros.
+2. Configure as credenciais do banco de dados no arquivo `db.php`.
+3. Abra o sistema em um servidor web (ex: Apache) e acesse a página inicial `index.php`.
+4. Faça login com um usuário existente ou cadastre um novo usuário.
+5. Após o login, você será redirecionado para a lista de produtos ou fornecedores, dependendo do número de produtos cadastrados.
+6. Explore as diferentes funcionalidades do sistema, como cadastrar novos produtos, fornecedores, visualizar a lista de produtos disponíveis, adicionar produtos à cesta de compras, entre outros.
 
 ## Funcionalidades
 
